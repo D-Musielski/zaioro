@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private AuthenticationProvider authenticationProvider;
-
+    //gwno kurwa
 //    @Autowired
 //    @Qualifier("daoAuthenticationProvider")
 //    public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
