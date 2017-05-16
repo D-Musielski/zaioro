@@ -16,6 +16,16 @@ public class Book {
     private String author;
     private String title;
 
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     public Integer getId() {
         return id;
     }

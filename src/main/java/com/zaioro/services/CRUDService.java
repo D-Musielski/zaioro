@@ -1,14 +1,16 @@
 package com.zaioro.services;
 
+/**
+ * Created by Val on 2017-05-15.
+ */
 import java.util.List;
 
-/**
- * Created by Val on 2017-05-05.
- */
 public interface CRUDService<T> {
+    List<?> listAll();
 
     T getById(Integer id);
-    List<?> listAll();
+
     T saveOrUpdate(T domainObject);
+
     void delete(Integer id);
 }

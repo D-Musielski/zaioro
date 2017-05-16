@@ -1,4 +1,4 @@
-package com.zaioro.configurations;
+package com.zaioro.configuration;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

@@ -4,22 +4,31 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Val on 2017-05-05.
- */
-
 @Entity
-public class User {
+public class User extends AbstractDomainClass  {
 
     private String username;
 
+    @Transient
     private String password;
 
-    private Boolean active = true;
+    private String encryptedPassword;
+    private Boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private List<Role> roles = new ArrayList<>();
+    private Integer failedLoginAttempts = 0;
+
+    List<Book> books = new ArrayList<>();
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
 
     public String getUsername() {
         return username;
@@ -37,6 +46,23 @@ public class User {
         this.password = password;
     }
 
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+
     public List<Role> getRoles() {
         return roles;
     }
@@ -45,18 +71,26 @@ public class User {
         this.roles = roles;
     }
 
-    public void addRole(Role role) {
-        if(!this.roles.contains(role)) {
+    public void addRole(Role role){
+        if(!this.roles.contains(role)){
             this.roles.add(role);
         }
 
-        if(!role.getUsers().contains(this)) {
+        if(!role.getUsers().contains(this)){
             role.getUsers().add(this);
         }
     }
 
-    public void removeRole(Role role) {
+    public void removeRole(Role role){
         this.roles.remove(role);
         role.getUsers().remove(this);
+    }
+
+    public Integer getFailedLoginAttempts() {
+        return failedLoginAttempts;
+    }
+
+    public void setFailedLoginAttempts(Integer failedLoginAttempts) {
+        this.failedLoginAttempts = failedLoginAttempts;
     }
 }
