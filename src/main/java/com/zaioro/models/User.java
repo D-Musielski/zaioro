@@ -20,16 +20,6 @@ public class User extends AbstractDomainClass  {
     private List<Role> roles = new ArrayList<>();
     private Integer failedLoginAttempts = 0;
 
-    List<Book> books = new ArrayList<>();
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -61,7 +51,6 @@ public class User extends AbstractDomainClass  {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-
 
     public List<Role> getRoles() {
         return roles;

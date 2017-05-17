@@ -1,6 +1,9 @@
 package com.zaioro.models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created by Val on 2017-04-09.
@@ -15,16 +18,6 @@ public class Book {
 
     private String author;
     private String title;
-
-    private Integer userId;
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public Integer getId() {
         return id;

@@ -50,6 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests().antMatchers("/","/adduser").permitAll()
                 .and()
+                .authorizeRequests().antMatchers("/users").hasAuthority("ADMIN")
+                .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout().permitAll();
