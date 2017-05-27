@@ -50,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests().antMatchers("/","/adduser").permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/users").hasAuthority("ADMIN")
+                .authorizeRequests().antMatchers("/users","/deleteuser/*").hasAuthority("ADMIN")
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
@@ -58,5 +58,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         httpSecurity.csrf().disable();
         httpSecurity.headers().frameOptions().disable();
+        httpSecurity.formLogin().defaultSuccessUrl("/books", true);
     }
 }

@@ -8,26 +8,30 @@
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
     <div th:if="${not #lists.isEmpty(books)}">
         <h2>Books List</h2>
-        <table class="table table-striped">
-            <tr>
-                <th>Id</th>
-                <th>Author</th>
-                <th>Title</th>
-                <th>View</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            <tr th:each="book : ${books}">
-                <td th:text="${book.id}"><a href="/book/${book.id}">Id</a></td>
-                <td th:text="${book.author}">Author</td>
-                <td th:text="${book.title}">Title</td>
-                <td><a th:href="${'/book/show/' + book.id}">View</a></td>
-                <td><a th:href="${'/book/edit/' + book.id}">Edit</a></td>
-                <td><a th:href="${'/book/delete/' + book.id}">Delete</a></td>
-            </tr>
+        <table id="books">
+            <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Title</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.author}">Author</td>
+                    <td th:text="${book.title}">Title</td>
+                    <td><a th:href="${'/book/edit/' + book.id}">Edit</a></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
-
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script>
+    $(function(){
+        $("#books").dataTable();
+    })
+</script>
 </body>
 </html>

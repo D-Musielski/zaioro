@@ -3,6 +3,8 @@ package com.zaioro.loader;
 import com.zaioro.models.Role;
 import com.zaioro.models.User;
 import com.zaioro.repositories.BookRepository;
+import com.zaioro.repositories.UserRepository;
+import com.zaioro.services.EncryptionService;
 import com.zaioro.services.RoleService;
 import com.zaioro.services.UserService;
 import org.apache.log4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //import com.zaioro.services.RoleService;
@@ -24,10 +27,24 @@ import java.util.List;
 public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 
     private BookRepository bookRepository;
+    private UserRepository userRepository;
     private UserService userService;
     private RoleService roleService;
+    private EncryptionService encryptionService;
+    private List<Role> roles = new ArrayList<>();
+    private Role role = new Role();
+
+    @Autowired
+    public void setEncryptionService(EncryptionService encryptionService) {
+        this.encryptionService = encryptionService;
+    }
 
     private Logger logger = Logger.getLogger(Loader.class);
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Autowired
     public void setBookRepository(BookRepository bookRepository) {
@@ -46,30 +63,64 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+//        this.roleService = roleService;
+//        role.setRole("USER");
+//        roleService.saveOrUpdate(role);
+//        roles.add(role);
+//        User user = new User();
+//        user.setUsername("dexter");
+//        user.setEncryptedPassword(encryptionService.encryptString("dexter"));
+//        user.addRole(role);
+//        //userRepository.save(user);
+////        userRepository.save(user1);
+//        User user2 = new User("dexter2","dexter2");
+////        user2.setUsername("dexter2");
+////        user2.setPassword("dexter2");
+//        userService.saveOrUpdate(user2);
+//
 //        Book dexter = new Book();
 //        dexter.setAuthor("Jeff Lindsay");
 //        dexter.setTitle("Darkly Dreaming Dexter");
-//        bookRepository.save(dexter);
-//
-//        logger.info("dex " + dexter.getId());
+//        dexter.setUser(user);
+//        //bookRepository.save(dexter);
 //
 //        Book shining = new Book();
 //        shining.setAuthor("Stephen King");
 //        shining.setTitle("Shining");
-//        bookRepository.save(shining);
+//        shining.setUser(user);
+//        //bookRepository.save(shining);
 //
-//        logger.info("sh " + shining.getId());
+//        Set<Book> books = new HashSet<>();
+//        books.add(dexter);
+//        books.add(shining);
+//
+//        user.setBooks(books);
+//        userRepository.save(user);
+//        for (User user1: userRepository.findAll()) {
+//            logger.info(user1.toString());
+//        }
+
+        //logger.info("dex " + dexter.getId());
+
+
+
+
+        //logger.info("sh " + shining.getId());
 
 //        loadUsers();
 //        loadRoles();
 //        assignUsersToUserRole();
 //        assignUsersToAdminRole();
+
     }
+
+
+
 
     private void loadUsers() {
         User user1 = new User();
-        user1.setUsername("user1");
-        user1.setPassword("user");
+        user1.setUsername("dexter");
+        user1.setPassword("dexter");
         userService.saveOrUpdate(user1);
 
         User user2 = new User();

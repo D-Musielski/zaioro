@@ -2,10 +2,24 @@ package com.zaioro.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User extends AbstractDomainClass  {
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
 
     private String username;
 
@@ -19,6 +33,25 @@ public class User extends AbstractDomainClass  {
     @JoinTable
     private List<Role> roles = new ArrayList<>();
     private Integer failedLoginAttempts = 0;
+
+    private Set<Book> books = new HashSet<>();
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    @Access(AccessType.PROPERTY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 
     public String getUsername() {
         return username;
@@ -81,5 +114,21 @@ public class User extends AbstractDomainClass  {
 
     public void setFailedLoginAttempts(Integer failedLoginAttempts) {
         this.failedLoginAttempts = failedLoginAttempts;
+    }
+
+    @Override
+    public String toString() {
+        String result = String.format(
+                "User[id=%d, name='%s']%n",
+                id, username);
+        if (books != null) {
+            for(Book book : books) {
+                result += String.format(
+                        "Book[id=%d, title='%s']%n",
+                        book.getId(), book.getTitle());
+            }
+        }
+
+        return result;
     }
 }
